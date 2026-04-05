@@ -1081,10 +1081,9 @@ func (s *TerminalRenderer) clearUpdate(newbuf *RenderBuffer) {
 		s.clearScreen(blank)
 	} else {
 		nonEmpty = newbuf.Height()
-		// FIXME: Investigate the double [ansi.ClearScreenBelow] call.
-		// Commenting the line below out seems to work but it might cause other
-		// bugs.
-		s.clearBelow(newbuf, blank, 0)
+		// Reset curbuf so transformLine sees diffs, but don't emit
+		// EraseScreenBelow here -- clearBottom handles the actual clear.
+		s.curbuf.Clear()
 	}
 	nonEmpty = s.clearBottom(newbuf, nonEmpty)
 	for i := 0; i < nonEmpty && i < newbuf.Height(); i++ {
