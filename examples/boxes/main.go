@@ -15,11 +15,11 @@ import (
 )
 
 type App struct {
-	scr   *gamma.Window
-	root  *gamma.Window
-	mtx   sync.RWMutex
-	quit  bool
-	drag  *gamma.Window // window being dragged
+	scr    *gamma.Window
+	root   *gamma.Window
+	mtx    sync.RWMutex
+	quit   bool
+	drag   *gamma.Window // window being dragged
 	styles map[*gamma.Window]gamma.Style
 }
 
