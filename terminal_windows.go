@@ -5,7 +5,6 @@ package gamma
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/charmbracelet/x/term"
 	"golang.org/x/sys/windows"
@@ -77,9 +76,3 @@ func supportsHardTabs(uint64) bool {
 	return true
 }
 
-func startWinch(_, _ term.File) (chan os.Signal, error) {
-	return nil, ErrPlatformNotSupported
-}
-
-func stopWinch(chan os.Signal) {
-}

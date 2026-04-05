@@ -3,12 +3,9 @@ package gamma
 import (
 	"io"
 	"os"
-	"runtime"
 
 	"github.com/charmbracelet/x/term"
 )
-
-var isWindows = runtime.GOOS == "windows"
 
 // File is an interface that represents a file with a file descriptor.
 //
