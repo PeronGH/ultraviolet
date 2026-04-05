@@ -230,6 +230,17 @@ func TestWindowBoundsReturnsLocalRect(t *testing.T) {
 	}
 }
 
+func TestWindowAbsoluteBounds(t *testing.T) {
+	root := NewScreen(40, 20)
+	parent := root.NewWindow(5, 4, 20, 10)
+	child := parent.NewWindow(3, 2, 7, 5)
+
+	b := child.AbsoluteBounds()
+	if b.Min.X != 8 || b.Min.Y != 6 || b.Dx() != 7 || b.Dy() != 5 {
+		t.Fatalf("unexpected absolute bounds: %v", b)
+	}
+}
+
 func TestWindowWideCellFitsExactly(t *testing.T) {
 	root := NewScreen(10, 5)
 	win := root.NewWindow(0, 0, 4, 1)
@@ -387,5 +398,24 @@ func TestDrawCompositesChildren(t *testing.T) {
 	c = target.CellAt(7, 4)
 	if c == nil || c.Content != "X" {
 		t.Fatalf("expected X at (7,4) on target, got %v", c)
+	}
+}
+
+func TestNestedWindowDrawTo(t *testing.T) {
+	root := NewScreen(30, 15)
+	parent := root.NewWindow(5, 4, 10, 6)
+	child := parent.NewWindow(2, 1, 3, 2)
+	child.Fill(&Cell{Content: "N", Width: 1})
+
+	target := NewScreen(30, 15)
+	child.DrawTo(target)
+
+	c := target.CellAt(7, 5)
+	if c == nil || c.Content != "N" {
+		t.Fatalf("expected N at (7,5), got %v", c)
+	}
+	c = target.CellAt(9, 6)
+	if c == nil || c.Content != "N" {
+		t.Fatalf("expected N at (9,6), got %v", c)
 	}
 }

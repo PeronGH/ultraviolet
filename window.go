@@ -241,6 +241,15 @@ func (w *Window) Bounds() Rectangle {
 	return w.bounds
 }
 
+// AbsoluteBounds returns the window bounds translated into root coordinates.
+func (w *Window) AbsoluteBounds() Rectangle {
+	bounds := w.bounds
+	for parent := w.parent; parent != nil; parent = parent.parent {
+		bounds = bounds.Add(parent.bounds.Min)
+	}
+	return bounds
+}
+
 // NewWindow creates a new window with its own buffer relative to the parent
 // window at the specified position and size.
 //
@@ -264,7 +273,10 @@ func NewScreen(width, height int) *Window {
 	return newWindow(nil, 0, 0, width, height, &method, false)
 }
 
-// Draw draws the window's content to the given screen at the specified area.
+// Draw draws the window and all of its descendant windows to the given screen
+// at the specified area. Child windows are composited in z-order
+// (back-to-front).
+//
 // For views, it reads from the correct region of the parent buffer.
 func (w *Window) Draw(scr Screen, area Rectangle) {
 	if area.Empty() {
@@ -303,11 +315,16 @@ func (w *Window) Draw(scr Screen, area Rectangle) {
 		}
 	}
 
-	// Draw children in z-order (back-to-front).
 	for _, child := range w.children {
 		childArea := child.bounds.Add(area.Min)
 		child.Draw(scr, childArea)
 	}
+}
+
+// DrawTo draws the window's subtree to the given screen at its absolute
+// position in root-window coordinates.
+func (w *Window) DrawTo(scr Screen) {
+	w.Draw(scr, w.AbsoluteBounds())
 }
 
 // SetWidthMethod sets the width method for the window.
