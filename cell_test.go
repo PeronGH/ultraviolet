@@ -329,7 +329,7 @@ func TestStyleDiff(t *testing.T) {
 			name: "bold, faint, and italic to bold",
 			from: &Style{Attrs: AttrBold | AttrFaint | AttrItalic},
 			to:   &Style{Attrs: AttrBold},
-			want: "\x1b[22;23;1m",
+			want: "\x1b[m\x1b[1m",
 		},
 		{
 			name: "bold to bold, faint, and italic",
@@ -353,7 +353,7 @@ func TestStyleDiff(t *testing.T) {
 			name: "bold, faint, and italic to faint",
 			from: &Style{Attrs: AttrBold | AttrFaint | AttrItalic},
 			to:   &Style{Attrs: AttrFaint},
-			want: "\x1b[22;23;2m",
+			want: "\x1b[m\x1b[2m",
 		},
 		{
 			name: "bold, faint, and italic to italic",
@@ -720,7 +720,7 @@ func TestStyleDiff(t *testing.T) {
 			to: &Style{
 				Attrs: AttrBold,
 			},
-			want: "\x1b[39;49m",
+			want: "\x1b[m\x1b[1m",
 		},
 		{
 			name: "change all colors",

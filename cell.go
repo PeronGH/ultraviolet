@@ -247,11 +247,6 @@ func StyleDiff(from, to *Style) string {
 		return ansi.ResetStyle
 	}
 
-	// TODO: Optimize further by checking if a full reset is cheaper than
-	// calculating diffs. Often, it might be cheaper to reset everything and
-	// then set the desired styles rather than calculating diffs. Also more
-	// compatible with terminals that have buggy SGR implementations.
-
 	var b ansi.Style
 
 	if !colorEqual(from.Fg, to.Fg) {
@@ -380,7 +375,16 @@ func StyleDiff(from, to *Style) string {
 		b = b.UnderlineStyle(to.Underline)
 	}
 
-	return b.String()
+	diff := b.String()
+
+	// A full reset + reapply is often shorter than an incremental diff,
+	// especially when many attributes change at once.
+	reset := ansi.ResetStyle + to.String()
+	if len(reset) < len(diff) {
+		return reset
+	}
+
+	return diff
 }
 
 func colorEqual(c, o color.Color) bool {
