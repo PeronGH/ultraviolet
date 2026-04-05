@@ -75,4 +75,3 @@ func supportsBackspace(uint64) bool {
 func supportsHardTabs(uint64) bool {
 	return true
 }
-

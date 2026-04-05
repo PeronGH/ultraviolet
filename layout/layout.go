@@ -649,7 +649,7 @@ func configureFlexConstraints(
 		}
 
 	case FlexSpaceAround:
-		if len(spacers) <= 2 {
+		if len(spacers) <= 2 { //nolint:nestif // constraint solver logic, splitting would reduce clarity
 			for _, indices := range combinations(len(spacers), 2) {
 				i, j := indices[0], indices[1]
 

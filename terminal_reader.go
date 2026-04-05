@@ -53,8 +53,7 @@ type TerminalReader struct {
 
 	term string // term is the terminal name $TERM.
 
-	paste  []byte // bracketed paste mode buffer; nil when disabled
-	lookup bool   // whether to use the lookup table for key sequences
+	lookup bool // whether to use the lookup table for key sequences
 
 	vtInput bool //nolint:unused // used in platform-specific files (Windows Console API VT input mode)
 

@@ -135,7 +135,7 @@ func printString[T []byte | string](
 			cell.Style = style
 			cell.Link = link
 
-			if s == nil {
+			if s == nil { //nolint:nestif // intentionally structured as screen-vs-lines branch
 				// Building lines: unwrapped, no bounds
 				if y >= len(lines) {
 					lines = append(lines, Line{})

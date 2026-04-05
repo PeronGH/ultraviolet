@@ -531,11 +531,11 @@ func (p *EventDecoder) parseCsi(b []byte) (int, Event) {
 		cs, _, _ := pa.Param(4, 0)
 		rc, _, _ := pa.Param(5, 0)
 		event := p.parseWin32InputKeyEvent(
-			uint16(vk),        
-			uint16(sc),        
-			rune(uc),           // Uc UnicodeChar
-			kd == 1,            // Kd bKeyDown
-			uint32(cs),        
+			uint16(vk),
+			uint16(sc),
+			rune(uc), // Uc UnicodeChar
+			kd == 1,  // Kd bKeyDown
+			uint32(cs),
 			max(1, uint16(rc)),
 		)
 
