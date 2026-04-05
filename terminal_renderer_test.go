@@ -958,11 +958,11 @@ func TestRendererUnderlineStyles(t *testing.T) {
 
 	// Test different underline styles
 	styles := []Style{
-		{Underline: UnderlineStyleSingle},
-		{Underline: UnderlineStyleDouble},
-		{Underline: UnderlineStyleCurly},
-		{Underline: UnderlineStyleDotted},
-		{Underline: UnderlineStyleDashed},
+		{Underline: UnderlineSingle},
+		{Underline: UnderlineDouble},
+		{Underline: UnderlineCurly},
+		{Underline: UnderlineDotted},
+		{Underline: UnderlineDashed},
 	}
 
 	for i, style := range styles {

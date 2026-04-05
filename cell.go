@@ -123,20 +123,8 @@ const (
 	AttrReset = 0
 )
 
-// AttrSlowBlink is an alias for AttrBlink.
-//
-// Deprecated: Use [AttrBlink] instead.
-const (
-	AttrSlowBlink = AttrBlink
-)
-
 // Underline is the style of underline to use for text.
 type Underline = ansi.Underline
-
-// UnderlineStyle is the style of underline to use for text.
-//
-// Deprecated: Use [Underline] instead.
-type UnderlineStyle = ansi.Underline
 
 // These are the available underline styles.
 const (
@@ -146,18 +134,6 @@ const (
 	UnderlineCurly  = ansi.UnderlineCurly
 	UnderlineDotted = ansi.UnderlineDotted
 	UnderlineDashed = ansi.UnderlineDashed
-)
-
-// These are the available underline styles.
-//
-// Deprecated: Use the constants from [Underline] instead.
-const (
-	UnderlineStyleNone   = ansi.UnderlineNone
-	UnderlineStyleSingle = ansi.UnderlineSingle
-	UnderlineStyleDouble = ansi.UnderlineDouble
-	UnderlineStyleCurly  = ansi.UnderlineCurly
-	UnderlineStyleDotted = ansi.UnderlineDotted
-	UnderlineStyleDashed = ansi.UnderlineDashed
 )
 
 // Style represents the style of a cell.
@@ -220,18 +196,18 @@ func (s *Style) String() string {
 			b = b.Strikethrough(true)
 		}
 	}
-	if s.Underline != UnderlineStyleNone {
+	if s.Underline != UnderlineNone {
 		switch s.Underline {
-		case UnderlineStyleSingle:
+		case UnderlineSingle:
 			b = b.Underline(true)
-		case UnderlineStyleDouble:
-			b = b.UnderlineStyle(UnderlineStyleDouble)
-		case UnderlineStyleCurly:
-			b = b.UnderlineStyle(UnderlineStyleCurly)
-		case UnderlineStyleDotted:
-			b = b.UnderlineStyle(UnderlineStyleDotted)
-		case UnderlineStyleDashed:
-			b = b.UnderlineStyle(UnderlineStyleDashed)
+		case UnderlineDouble:
+			b = b.UnderlineStyle(UnderlineDouble)
+		case UnderlineCurly:
+			b = b.UnderlineStyle(UnderlineCurly)
+		case UnderlineDotted:
+			b = b.UnderlineStyle(UnderlineDotted)
+		case UnderlineDashed:
+			b = b.UnderlineStyle(UnderlineDashed)
 		}
 	}
 	if s.Fg != nil {
@@ -297,7 +273,7 @@ func StyleDiff(from, to *Style) string {
 	fromBold := from.Attrs&AttrBold != 0
 	fromFaint := from.Attrs&AttrFaint != 0
 	fromItalic := from.Attrs&AttrItalic != 0
-	fromUnderline := from.Underline != UnderlineStyleNone
+	fromUnderline := from.Underline != UnderlineNone
 	fromBlink := from.Attrs&AttrBlink != 0
 	fromRapidBlink := from.Attrs&AttrRapidBlink != 0
 	fromReverse := from.Attrs&AttrReverse != 0
@@ -306,7 +282,7 @@ func StyleDiff(from, to *Style) string {
 	toBold := to.Attrs&AttrBold != 0
 	toFaint := to.Attrs&AttrFaint != 0
 	toItalic := to.Attrs&AttrItalic != 0
-	toUnderline := to.Underline != UnderlineStyleNone
+	toUnderline := to.Underline != UnderlineNone
 	toBlink := to.Attrs&AttrBlink != 0
 	toRapidBlink := to.Attrs&AttrRapidBlink != 0
 	toReverse := to.Attrs&AttrReverse != 0
@@ -373,7 +349,7 @@ func StyleDiff(from, to *Style) string {
 		b = b.Italic(true)
 	}
 
-	if underlineChanged && toUnderline && to.Underline == UnderlineStyleSingle {
+	if underlineChanged && toUnderline && to.Underline == UnderlineSingle {
 		// We only handle single underline here since others require more
 		// specific handling at the end.
 		b = b.Underline(true)
@@ -400,7 +376,7 @@ func StyleDiff(from, to *Style) string {
 	}
 
 	// Handle special underline styles.
-	if underlineChanged && toUnderline && to.Underline > UnderlineStyleSingle {
+	if underlineChanged && toUnderline && to.Underline > UnderlineSingle {
 		b = b.UnderlineStyle(to.Underline)
 	}
 

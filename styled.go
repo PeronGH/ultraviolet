@@ -246,22 +246,22 @@ func ReadStyle(params ansi.Params, pen *Style) {
 					i++
 					switch nextParam {
 					case 0: // No Underline
-						pen.Underline = UnderlineStyleNone
+						pen.Underline = UnderlineNone
 					case 1: // Single Underline
-						pen.Underline = UnderlineStyleSingle
+						pen.Underline = UnderlineSingle
 					case 2: // Double Underline
-						pen.Underline = UnderlineStyleDouble
+						pen.Underline = UnderlineDouble
 					case 3: // Curly Underline
-						pen.Underline = UnderlineStyleCurly
+						pen.Underline = UnderlineCurly
 					case 4: // Dotted Underline
-						pen.Underline = UnderlineStyleDotted
+						pen.Underline = UnderlineDotted
 					case 5: // Dashed Underline
-						pen.Underline = UnderlineStyleDashed
+						pen.Underline = UnderlineDashed
 					}
 				}
 			} else {
 				// Single Underline
-				pen.Underline = UnderlineStyleSingle
+				pen.Underline = UnderlineSingle
 			}
 		case 5: // Slow Blink
 			pen.Attrs |= AttrBlink
@@ -278,7 +278,7 @@ func ReadStyle(params ansi.Params, pen *Style) {
 		case 23: // Not italic, not Fraktur
 			pen.Attrs &^= AttrItalic
 		case 24: // Not underlined
-			pen.Underline = UnderlineStyleNone
+			pen.Underline = UnderlineNone
 		case 25: // Blink off
 			pen.Attrs &^= (AttrBlink | AttrRapidBlink)
 		case 27: // Positive (not reverse)
