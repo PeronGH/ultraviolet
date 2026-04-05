@@ -66,11 +66,8 @@ func main() {
 	now := time.Now()
 	fps := 60.0
 	fpsFrameCount := 0
-
-	bounds := scr.Bounds()
-	colors := setupColors(bounds.Dx(), bounds.Dy())
-
-	go t.SendEvent(tickEvent{})
+	var colors [][]color.Color
+	ticking := false
 
 LOOP:
 	for {
@@ -90,6 +87,10 @@ LOOP:
 				width, height := ev.Width, ev.Height
 				colors = setupColors(width, height)
 				scr.Resize(width, height)
+				if !ticking {
+					ticking = true
+					go t.SendEvent(tickEvent{})
+				}
 			case tickEvent:
 				if len(colors) == 0 {
 					continue
