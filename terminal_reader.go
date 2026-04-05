@@ -53,27 +53,21 @@ type TerminalReader struct {
 
 	term string // term is the terminal name $TERM.
 
-	// paste is the bracketed paste mode buffer.
-	// When nil, bracketed paste mode is disabled.
-	paste []byte
+	paste  []byte // bracketed paste mode buffer; nil when disabled
+	lookup bool   // whether to use the lookup table for key sequences
 
-	lookup bool // lookup indicates whether to use the lookup table for key sequences.
-
-	// vtInput indicates whether we're using Windows Console API VT input mode.
-	//nolint:unused,nolintlint
-	vtInput bool
+	vtInput bool //nolint:unused // used in platform-specific files (Windows Console API VT input mode)
 
 	eventScanner *eventScanner
 
-	// We use these buffers to decode UTF-16 sequences and graphemes from the
+	// Buffers for decoding UTF-16 sequences and graphemes from
 	// Windows Console API and Win32-Input-Mode events.
-	utf16Half   [2]bool    // 0 key up, 1 key down
-	utf16Buf    [2][2]rune // 0 key up, 1 key down
-	graphemeBuf [2][]rune  // 0 key up, 1 key down
-	//nolint:unused,nolintlint
-	lastMouseBtns uint32 // the last mouse button state for the previous event
-	//nolint:unused,nolintlint
-	lastWinsizeX, lastWinsizeY int16 // the last window size for the previous event to prevent multiple size events from firing
+	utf16Half   [2]bool   //nolint:unused // used in platform-specific files
+	utf16Buf    [2][2]rune //nolint:unused // used in platform-specific files
+	graphemeBuf [2][]rune  //nolint:unused // used in platform-specific files
+
+	lastMouseBtns              uint32 //nolint:unused // used in platform-specific files
+	lastWinsizeX, lastWinsizeY int16  //nolint:unused // used in platform-specific files
 
 	logger Logger // The logger to use for debugging.
 }
