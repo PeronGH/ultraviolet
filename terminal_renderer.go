@@ -1281,12 +1281,12 @@ func (s *TerminalRenderer) SetPosition(x, y int) {
 
 // WriteString writes the given string to the underlying buffer.
 func (s *TerminalRenderer) WriteString(str string) (int, error) {
-	return s.buf.WriteString(str) //nolint:wrapcheck
+	return s.buf.WriteString(str)
 }
 
 // Write writes the given bytes to the underlying buffer.
 func (s *TerminalRenderer) Write(b []byte) (int, error) {
-	return s.buf.Write(b) //nolint:wrapcheck
+	return s.buf.Write(b)
 }
 
 // MoveTo calculates and writes the shortest sequence to move the cursor to the

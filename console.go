@@ -1,6 +1,7 @@
 package gamma
 
 import (
+	"fmt"
 	"io"
 	"os"
 
@@ -180,13 +181,13 @@ func (t *console) MakeRaw() (state *term.State, err error) {
 func (t *console) Restore() error {
 	if t.inputState != nil {
 		if err := term.Restore(t.input.Fd(), t.inputState); err != nil {
-			return err
+			return fmt.Errorf("restoring input terminal: %w", err)
 		}
 		t.inputState = nil
 	}
 	if t.outputState != nil {
 		if err := term.Restore(t.output.Fd(), t.outputState); err != nil {
-			return err
+			return fmt.Errorf("restoring output terminal: %w", err)
 		}
 		t.outputState = nil
 	}

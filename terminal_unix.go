@@ -25,7 +25,7 @@ func makeRaw(inTty, outTty term.File) (inTtyState, outTtyState *term.State, err 
 	}
 
 	if err != nil {
-		return nil, nil, err //nolint:wrapcheck
+		return nil, nil, err
 	}
 
 	return inTtyState, outTtyState, nil

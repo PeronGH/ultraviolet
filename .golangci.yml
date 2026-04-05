@@ -36,6 +36,19 @@ linters:
   settings:
     exhaustive:
       default-signifies-exhaustive: true
+    wrapcheck:
+      ignore-interfaces:
+        - io.Reader
+        - io.Writer
+        - io.StringWriter
+      ignore-package-globs:
+        - bytes
+        - bufio
+        - fmt
+        - io
+        - os
+        - github.com/charmbracelet/*
+        - github.com/muesli/*
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0

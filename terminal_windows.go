@@ -54,7 +54,7 @@ func makeRaw(inTty, outTty term.File) (inTtyState, outTtyState *term.State, err 
 
 func getSize(_, outTty term.File) (w, h int, err error) {
 	if outTty != nil {
-		return term.GetSize(outTty.Fd()) //nolint:wrapcheck
+		return term.GetSize(outTty.Fd())
 	}
 	return 0, 0, ErrNotTerminal
 }
