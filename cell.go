@@ -407,7 +407,7 @@ func (s *Style) IsZero() bool {
 // ConvertStyle converts a style to respect the given color profile.
 func ConvertStyle(s Style, p colorprofile.Profile) Style {
 	switch p {
-	case colorprofile.TrueColor:
+	case colorprofile.TrueColor, colorprofile.Unknown:
 		return s
 	case colorprofile.ANSI, colorprofile.ANSI256:
 	case colorprofile.Ascii:

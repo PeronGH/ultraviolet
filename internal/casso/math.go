@@ -46,6 +46,7 @@ type Priority float64
 // Op represents a constraint operator.
 type Op uint8
 
+// Constraint operators.
 const (
 	EQ Op = iota
 	GTE

@@ -1,3 +1,4 @@
+// Package lru implements a generic least-recently-used cache.
 package lru
 
 import (
@@ -5,6 +6,7 @@ import (
 	"fmt"
 )
 
+// LRU is a fixed-size least-recently-used cache.
 type LRU[K comparable, V any] struct {
 	size int
 
@@ -17,6 +19,7 @@ type entry[K comparable, T any] struct {
 	Value T
 }
 
+// New creates a new LRU cache with the given maximum size.
 func New[K comparable, V any](size int) *LRU[K, V] {
 	if size < 0 {
 		panic(fmt.Sprintf("lru: negative size given: %d", size))
@@ -29,6 +32,7 @@ func New[K comparable, V any](size int) *LRU[K, V] {
 	}
 }
 
+// Get retrieves a value by key, returning it and whether it was found.
 func (c *LRU[K, V]) Get(key K) (V, bool) {
 	e, ok := c.items[key]
 	if !ok {
@@ -42,6 +46,7 @@ func (c *LRU[K, V]) Get(key K) (V, bool) {
 	return e.Value.(entry[K, V]).Value, true
 }
 
+// Add inserts a key-value pair, evicting the oldest entry if at capacity.
 func (c *LRU[K, V]) Add(key K, value V) (evicted bool) {
 	if e, ok := c.items[key]; ok {
 		c.evict.MoveToFront(e)

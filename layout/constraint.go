@@ -150,25 +150,25 @@ type (
 )
 
 func (m Min) String() string   { return fmt.Sprintf("Min(%d)", m) }
-func (m Min) hash(w io.Writer) { fmt.Fprint(w, "min", m) }
+func (m Min) hash(w io.Writer) { fmt.Fprint(w, "min", m) } //nolint:errcheck // hash writer never fails
 func (Min) isConstraint()      {}
 
 func (m Max) String() string   { return fmt.Sprintf("Max(%d)", m) }
-func (m Max) hash(w io.Writer) { fmt.Fprint(w, "max", m) }
+func (m Max) hash(w io.Writer) { fmt.Fprint(w, "max", m) } //nolint:errcheck // hash writer never fails
 func (Max) isConstraint()      {}
 
 func (l Len) String() string   { return fmt.Sprintf("Len(%d)", l) }
-func (l Len) hash(w io.Writer) { fmt.Fprint(w, "len", l) }
+func (l Len) hash(w io.Writer) { fmt.Fprint(w, "len", l) } //nolint:errcheck // hash writer never fails
 func (Len) isConstraint()      {}
 
 func (p Percent) String() string   { return fmt.Sprintf("Percent(%d)", p) }
-func (p Percent) hash(w io.Writer) { fmt.Fprint(w, "percent", p) }
+func (p Percent) hash(w io.Writer) { fmt.Fprint(w, "percent", p) } //nolint:errcheck // hash writer never fails
 func (Percent) isConstraint()      {}
 
 func (r Ratio) String() string   { return fmt.Sprintf("Ratio(%d / %d)", r.Num, r.Den) }
-func (r Ratio) hash(w io.Writer) { fmt.Fprint(w, "ratio", r.Num, r.Den) }
+func (r Ratio) hash(w io.Writer) { fmt.Fprint(w, "ratio", r.Num, r.Den) } //nolint:errcheck // hash writer never fails
 func (Ratio) isConstraint()      {}
 
 func (f Fill) String() string   { return fmt.Sprintf("Fill(%d)", f) }
-func (f Fill) hash(w io.Writer) { fmt.Fprint(w, "fill", f) }
+func (f Fill) hash(w io.Writer) { fmt.Fprint(w, "fill", f) } //nolint:errcheck // hash writer never fails
 func (Fill) isConstraint()      {}

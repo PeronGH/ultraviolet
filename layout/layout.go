@@ -912,9 +912,9 @@ func (e element) sizeEqDouble(other element) casso.Constraint {
 	return casso.NewConstraint(casso.EQ, 0, e.end.T(1), e.start.T(-1), other.end.T(-2), other.start.T(2))
 }
 
-func combinations(n, k int) [][]int {
-	combins := binomial(n, k)
-	data := make([][]int, combins)
+func combinations(n, k int) [][]int { //nolint:unparam // k is always 2 but kept for clarity
+	combs := binomial(n, k)
+	data := make([][]int, combs)
 	if len(data) == 0 {
 		return nil
 	}
@@ -924,7 +924,7 @@ func combinations(n, k int) [][]int {
 		data[0][i] = i
 	}
 
-	for i := 1; i < combins; i++ {
+	for i := 1; i < combs; i++ {
 		next := make([]int, k)
 		copy(next, data[i-1])
 		nextCombination(next, n, k)

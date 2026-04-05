@@ -62,7 +62,7 @@ type TerminalReader struct {
 
 	// Buffers for decoding UTF-16 sequences and graphemes from
 	// Windows Console API and Win32-Input-Mode events.
-	utf16Half   [2]bool   //nolint:unused // used in platform-specific files
+	utf16Half   [2]bool    //nolint:unused // used in platform-specific files
 	utf16Buf    [2][2]rune //nolint:unused // used in platform-specific files
 	graphemeBuf [2][]rune  //nolint:unused // used in platform-specific files
 
