@@ -266,7 +266,7 @@ func readConsoleInput(console windows.Handle, inputRecords []xwindows.InputRecor
 
 	err := xwindows.ReadConsoleInput(console, &inputRecords[0], uint32(len(inputRecords)), &read) //nolint:gosec
 
-	return read, err //nolint:wrapcheck
+	return read, err
 }
 
 func peekConsoleInput(console windows.Handle, inputRecords []xwindows.InputRecord) (uint32, error) {
@@ -278,7 +278,7 @@ func peekConsoleInput(console windows.Handle, inputRecords []xwindows.InputRecor
 
 	err := xwindows.PeekConsoleInput(console, &inputRecords[0], uint32(len(inputRecords)), &read) //nolint:gosec
 
-	return read, err //nolint:wrapcheck
+	return read, err
 }
 
 func peekNConsoleInputs(console windows.Handle, maxEvents uint32) ([]xwindows.InputRecord, error) {

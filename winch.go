@@ -55,7 +55,7 @@ func (n *SizeNotifier) GetSize() (width, height int, err error) {
 
 	width, height, err = term.GetSize(n.f.Fd())
 	if err != nil {
-		return 0, 0, err //nolint:wrapcheck
+		return 0, 0, err
 	}
 
 	return width, height, nil

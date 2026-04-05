@@ -35,7 +35,7 @@ func (n *SizeNotifier) getWindowSize() (cells Size, pixels Size, err error) {
 
 	winsize, err := termios.GetWinsize(int(n.f.Fd()))
 	if err != nil {
-		return Size{}, Size{}, err //nolint:wrapcheck
+		return Size{}, Size{}, err
 	}
 
 	cells = Size{
